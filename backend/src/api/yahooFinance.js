@@ -1,4 +1,3 @@
-// backend/api/yahooFinance.js
 const puppeteer = require("puppeteer");
 const { getFromCache, setCache } = require("../utils/cache");
 

@@ -1,31 +1,29 @@
-// frontend/src/app/components/PortfolioDistributionChart.tsx
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { SectorSummary } from "../../interfaces/portfolio";
-import CustomPieChartLegend from "./CustomPieChartLegend"; // Import the new custom legend
+import CustomPieChartLegend from "./CustomPieChartLegend";
 
 interface PortfolioDistributionChartProps {
   sectors: { [key: string]: SectorSummary };
 }
 
 const COLORS = [
-  "#4CAF50", // Green
-  "#2196F3", // Blue
-  "#FFC107", // Amber
-  "#E91E63", // Pink
-  "#9C27B0", // Purple
-  "#FF9800", // Orange
-  "#00BCD4", // Cyan
-  "#8BC34A", // Light Green
-  "#FF5722", // Deep Orange
-  "#607D8B", // Blue Grey
-  "#795548", // Brown
-  "#673AB7", // Deep Purple
-  "#03A9F4", // Light Blue
-  "#CDDC39", // Lime
+  "#4CAF50",
+  "#2196F3",
+  "#FFC107",
+  "#E91E63",
+  "#9C27B0",
+  "#FF9800",
+  "#00BCD4",
+  "#8BC34A",
+  "#FF5722",
+  "#607D8B",
+  "#795548",
+  "#673AB7",
+  "#03A9F4",
+  "#CDDC39",
 ];
 
-// Define an interface for the label props, making properties potentially optional
 interface PieLabelRenderProps {
   cx?: number;
   cy?: number;
@@ -37,7 +35,6 @@ interface PieLabelRenderProps {
   name?: string;
 }
 
-// Custom label for slices - shows percentage directly on the slice
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -57,9 +54,7 @@ const renderCustomizedLabel = ({
     return null;
   }
 
-  // Only show label if the slice is big enough to prevent overcrowding
   if (percent * 100 > 5) {
-    // Only label slices larger than 5%
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos((-midAngle * Math.PI) / 180);
     const y = cy + radius * Math.sin((-midAngle * Math.PI) / 180);
@@ -103,8 +98,6 @@ const PortfolioDistributionChart: React.FC<PortfolioDistributionChartProps> = ({
       <h3 className="text-xl font-bold mb-4 text-gray-800">
         Investment Distribution by Sector
       </h3>
-      {/* ResponsiveContainer must only contain a single direct child. */}
-      {/* Ensure PieChart is the ONLY thing directly inside it. */}
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie
@@ -131,10 +124,8 @@ const PortfolioDistributionChart: React.FC<PortfolioDistributionChartProps> = ({
               name,
             ]}
           />
-          {/* No other components should be here directly */}
         </PieChart>
       </ResponsiveContainer>
-      {/* Our custom legend is correctly placed OUTSIDE the ResponsiveContainer */}
       <CustomPieChartLegend data={chartData} colors={COLORS} />
     </div>
   );
